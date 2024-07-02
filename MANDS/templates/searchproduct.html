@@ -1,0 +1,121 @@
+{% extends "index.html" %}
+
+{% block content %}
+{% if product %}
+<section class="hero is-primary"
+    style="background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.65)), url('/static/img/signup.jpg');">
+    <br>
+    <br>
+    <div class="hero-body">
+        <div class="container d-flex justify-content-center shadow-lg p-2 mb-5 bg-white rounded">
+            <h1 class="title">
+                <b>Product</b>
+            </h1>
+            {% if request.user.is_superuser %}
+            <div class="d-flex">
+                <a href="{% url 'addProduct' %}"><button type="button" class="btn btn-warning btn-lg px-4 shadow-lg"
+                        style="margin-left: 300%; margin-top: 7%;"><b>Add
+                            product</b></button></a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <br>
+    <form action="{% url 'productSearchView' service.name %}" method="GET">
+        <div class="input-group d-flex justify-content-center">
+            <div class="form-outline">
+                <input type="search" id="form1" name="search" placeholder="Search Product" class="form-control" />
+            </div>
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+    </form>
+    <br>
+    {% if post %}
+    <p class="d-flex justify-content-center" style="color: white; font-size: larger;"><b>
+            Search Result Found
+        </b></p>
+        {% for search in post %}
+        {% for product in product %}
+        {% if search == product %}
+    <div class="container">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="col">
+                <div class="card h-100 mb-3 shadow-lg mb-5 bg-white rounded">
+                    <img src="{{product.image.url}}" class="card-img-top" alt="Image"
+                        style="height: 15rem; width: 100%;">
+                    <h1 style="text-align: center;">{{product.product_name}}</h1>
+                    <p style="text-align: justify;">{{product.description}}</p>
+                    <br>
+                    <br>
+                    <br>
+                    {% if product.available == "AVAILABLE" %}
+                    <a href="{% url 'parts' product.product_name %}"><button type="button" class="btn btn-warning btn-lg px-4" style="width: 100%;">See
+                        parts</button></a>
+                    {% else %}
+    
+                    <a><button type="button" class="btn btn-warning btn-lg px-4"
+                        style="width: 100%;" disabled>Unavailable</button></a>
+                    {% endif %}
+
+                    <div class="container d-flex my-1">
+                        <div class="mx-5">
+                            <a href="{% url 'sureProduct' product.product_name %}"><button type="button" class="btn btn-danger btn-lg px-4">Delete</button></a>
+                        </div>
+                        <div class="me-5" style="margin-left: 9%;">
+                            <a href="{% url 'editProduct' product.product_name %}"><button type="button" class="btn btn-warning btn-lg px-4">Edit</button></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+    {% endfor %}
+    {% else %}
+    <h2 class="d-flex justify-content-center"><b>
+            Result Not Found. Try
+            different keywords.
+        </b></h2>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+    {% endif %}
+    <br>
+    <br>
+    {% else %}
+    <div class="card">
+        <div class="card-body justify-content-center" style="height: 758px; width: 100%;">
+            <div class="container d-flex justify-content-center">
+                <h1><b>No product available</b></h1>
+            </div>
+            <div class="container">
+                <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                    <a class="nav-link text-white" href="/"><button type="button"
+                            class="btn btn-primary btn-lg px-4 shadow-lg mb-5 rounded">Ok</button></a>
+                    <a href="{% url 'addProduct' %}"><button type="button"
+                            class="btn btn-primary btn-lg px-4 shadow-lg mb-5 rounded">Add
+                            Product</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+</section>
+{% endblock %}

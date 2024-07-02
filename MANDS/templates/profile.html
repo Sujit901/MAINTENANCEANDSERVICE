@@ -1,0 +1,63 @@
+{% extends "index.html" %}
+
+{% block content %}
+<section class="vh-150" 
+style="background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.65)), url('/static/img/signup.jpg');">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col col-xl-10">
+                <div class="card" style="border-radius: 2rem;">
+                    <div class="row g-0">
+                        <div class="col-md-6 col-lg-7 d-flex align-items-center">
+                            <div class="card-body p-4 p-lg-5 text-black">
+                                <div class="d-flex align-items-center mb-3 pb-1">
+                                </div>
+                                {% if success %}
+                                <div> {{ success }} </div>
+                                {% endif %}
+                                <div>
+                                    <h3><b>Username : </b></h3>
+                                    <h4>{{request.user.username}}</h4><br>
+                                    <h3><b>Email : </b></h3>
+                                    <h4>{{request.user.email}}</h4><br>
+                                    <h3><b>Name : </b></h3>
+                                    <h4>{{request.user.firstname}} {{request.user.middlename}} {{request.user.lastname}}</h4><br>
+                                    <h3><b>Phone number : </b></h3>
+                                    <h4>{{request.user.number}}</h4><br>
+                                    <h3><b>Location : </b></h3>
+                                    <h4>{{request.user.location}}</h4><br>
+                                </div>
+
+                            </div>
+                            <div>
+                                <a href="{% url 'sureprofile' user.id %}"><button type="button"
+                                        class="btn btn-danger btn-lg px-4">Delete</button></a>
+                                <a href="{% url 'editprofile' user.id %}"><button type="button"
+                                        class="btn btn-primary btn-lg px-4">Edit</button></a>
+                                <br>
+                                <br>
+                                <a href="{% url 'change-password' %}"><button type="button"
+                                        class="btn btn-primary btn-lg px-4">Change Password</button></a>
+                                <br>
+                                <br>
+                                <button type="button" class="btn btn-danger btn-lg px-4"
+                                    onclick="history.back()">Back</button>
+                                    <br>
+                                    <br>
+                                    <a href="{% url 'logout_view' %}"><button type="button"
+                                            class="btn btn-danger btn-lg px-4">Logout</button></a>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-5 d-none d-md-block">
+                            <!-- <img src="{{request.user.image.url}}" alt="Profile Pic" class="img-fluid"
+                                style="border-radius: 30%; margin-top: 25%; margin-left: 25%;" /> -->
+                                <img src="{{request.user.image}}" alt="Logo" width="200px" height="200px"
+          class="d-inline-block align-text-top" style="border-radius: 50%; margin-top: 25%; margin-left: 25%;" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

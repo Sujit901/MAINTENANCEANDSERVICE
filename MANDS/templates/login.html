@@ -1,0 +1,52 @@
+{% extends "index.html" %}
+
+{% block content %}
+<section class="vh-100 bg-image"
+    style="background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.65)), url('/static/img/signup.jpg');" id="login">
+    <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+        <div class="container h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                    <div class="card" style="border-radius: 15px;">
+                        <div class="card-body p-5">
+                            <h2 class="text-uppercase text-center mb-5">Login</h2>
+                            {% if error %}
+                            <div style="color:red"> {{ error }} </div>
+                            {% endif %}
+                            {% if success %}
+                            <div style="color: green;"> {{ success }} </div>
+                            {% endif %}
+<br>
+                            <form method="POST">
+                                {% csrf_token %}
+
+                                <div class="form-outline mb-4">
+                                    <label class="form-label" for="form3Example3cg">Your Email</label>
+                                    <input type="email" id="form3Example1cg" class="form-control form-control-lg" name="email" />
+                                </div>
+
+                                <div class="form-outline mb-4">
+                                    <label class="form-label" for="form3Example4cg">Password</label>
+                                    <input type="password" id="form3Example1cg" class="form-control form-control-lg" name="password" />
+                                </div>
+
+                                <div class="d-flex justify-content-center">
+                                    <button type="submit" class="btn btn-warning btn-block btn-lg gradient-custom-4 text-body">Login</button>
+                                </div>
+
+                                <a href="{% url 'password_reset' %}"
+                                       style="color: blue;"><p class="text-center text-muted mt-5 mb-0"><u>Forgot password?</u></p></a>
+
+                                <p class="text-center text-muted mt-5 mb-0">Already have an account? <a href="{% url 'signup_view' %}"
+                                       style="color: blue;"><u>Sign up here</u></a></p>
+
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

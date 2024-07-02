@@ -1,0 +1,98 @@
+{% extends "index.html" %}
+
+{% block content %}
+{% load static %}
+<section class="vh-150 bg-image"
+    style="background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.65)), url('/static/img/signup.jpg');" id="signup">
+    <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+        <div class="container h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                    <div class="card" style="border-radius: 15px;">
+                        <div class="card-body p-5">
+                            <h2 class="text-uppercase text-center mb-5">Book Service</h2>
+                            
+                            {% if error %}
+                            <div style="color:red"> {{ error }} </div>
+                            {% endif %}
+
+<br>
+                            <form method="POST">
+                                {% csrf_token %}
+                                <br>
+                                <div class="form-outline mb-4">
+                                    <label class="form-label" for="form3Example1cg">Your Name <span style="color: red;">*</span></label>
+                                    <input type="text" id="form3Example1cg" name="firstname" class="form-control form-control-lg" placeholder="First name" required="true" onkeydown="return /[a-zA-Z]/i.test(event.key)" value="{{request.user.firstname}}"/>
+                                    <br>
+                                    <input type="text" id="form3Example1cg" name="middlename" class="form-control form-control-lg" placeholder="Middle name (Optional)" onkeydown="return /[a-zA-Z]/i.test(event.key)" value="{{request.user.middlename}}"/>
+                                    <br>
+                                    <input type="text" id="form3Example1cg" name="lastname" class="form-control form-control-lg" placeholder="Last name" required="true" onkeydown="return /[a-zA-Z]/i.test(event.key)" value="{{request.user.lastname}}"/>
+                                </div>
+                                <br>
+                                <div class="d-flex flex-row align-items-center mb-4">
+                                    <div class="form-outline flex-fill mb-0">
+                                        <label class="form-label" for="form3Example1c">Phone Number <span style="color: red;">*</span></label>
+                                        <input type="text" name="number" id="form3Example1c" required="true"
+                                            class="form-control" placeholder="Phone Number" minlength="10" maxlength="10"  value="{{request.user.number}}"/>
+                                    </div>
+                                    
+                                </div>
+                                <div class="d-flex flex-row align-items-center mb-4">
+                                    <div class="form-outline flex-fill mb-0">
+                                        <label class="form-label" for="form3Example1c">Location <span style="color: red;">*</span></label>
+                                        <input type="text" name="location" id="form3Example1c" required="true"
+                                            class="form-control" placeholder="Location" maxlength="50" value="{{request.user.location}}"/>
+                                    </div>
+                                </div>
+                                <div class="form-outline mb-4">
+                                    <label class="form-label" for="form3Example3cg">Your Email <span style="color: red;">*</span></label>
+                                    <input type="email" id="form3Example3cg" name="email" placeholder="Email" class="form-control form-control-lg" required="true" value="{{request.user.email}}"/>
+                                </div>
+                                <div class="d-flex flex-row align-items-center mb-4">
+                                    <div class="form-outline flex-fill mb-0">
+                                        <label class="form-label" for="form4Example1c">Parts</label>
+                                        <input type="text" name="parts_name" id="form4Example1c" value="Problem Unknown" readonly="true"
+                                            class="form-control"/>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row align-items-center mb-4">
+                                    <div class="form-outline flex-fill mb-0">
+                                        <label class="form-label" for="form3Example1c">Parts price</label>
+                                        <input type="text" name="price" id="form3Example1c" value="0" readonly="true"
+                                            class="form-control" placeholder="Parts price" maxlength="50"/>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row align-items-center mb-4">
+                                    <div class="form-outline flex-fill mb-0">
+                                        <label class="form-label" for="form3Example1c">Service Charge</label>
+                                        <input type="text" name="service_charge" id="form3Example1c" value="0" readonly="true"
+                                            class="form-control" placeholder="Service Charge"/>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row align-items-center mb-4">
+                                    <div class="form-outline flex-fill mb-0">
+                                        <label class="form-label" for="form3Example1c">Date <span style="color: red;">*</span></label>
+                                        <input type="date" name="date" id="form3Example1c" class="form-control" placeholder="Date" required="true"/>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row align-items-center mb-4">
+                                    <div class="form-outline flex-fill mb-0">
+                                        <label class="form-label" for="form3Example1c">Time <span style="color: red;">*</span></label>
+                                        <input type="time" name="time" id="form3Example1c" class="form-control" placeholder="Time" required="true"/>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex justify-content-center">
+                                    <button type="submit" class="btn btn-warning btn-block btn-lg gradient-custom-4 text-body">Submit</button>
+                                </div>
+
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

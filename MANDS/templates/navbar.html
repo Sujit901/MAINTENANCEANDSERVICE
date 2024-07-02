@@ -1,0 +1,59 @@
+<nav id="navbar" class="navbar">
+  <ul>
+    <li><a class="nav-link scrollto active" href="/#hero">Home</a></li>
+    <li><a class="nav-link scrollto" href="/#resume">Why choose us?</a></li>
+    <li><a class="nav-link scrollto" href="/#services">Services</a></li>
+    <li><a class="nav-link scrollto " href="/#portfolio">Portfolio</a></li>
+    <li><a class="nav-link scrollto" href="/#about">About Us</a></li>
+    <li><a class="nav-link scrollto" href="/#contact">Contact</a></li>
+    {% if request.user.is_authenticated %}
+    {% if request.user.is_superuser %}
+    <li class="dropdown"><a href="#"><span>Manage</span> <i class="bi bi-chevron-down"></i></a>
+      <ul>
+        <li><a href="/banner">Banner</a></li>
+        <!-- <li><a href="#">Advertisement</a></li> -->
+        <li><a href="/staff">Staff</a></li>
+        <li><a href="/service">Service</a></li>
+        <!-- <li><a href="">Product</a></li>
+        <li><a href="">Parts</a></li> -->
+        <li class="dropdown"><a href="#"><span>ADD</span> <i class="bi bi-chevron-right"></i></a>
+          <ul>
+            <li><a href="/addBanner">ADD Banner</a></li>
+            <!-- <li><a href="#">Add Advertisement</a></li> -->
+            <li><a href="/addstaff">Add Staff</a></li>
+            <li><a href="/addService">Add Service</a></li>
+            <!-- <li><a href="/addProduct">Add Product</a></li>
+            <li><a href="/addParts">Add Parts</a></li> -->
+          </ul>
+        </li>
+      </ul>
+    </li>
+    {% endif %}
+    {% if request.user.is_staff %}
+    <li class="dropdown"><a href="#"><span>Book</span> <i class="bi bi-chevron-down"></i></a>
+      <ul>
+        <li><a href="/viewBookService">Booked Services</a></li>
+        <li><a href="/viewAcceptedBook">Accepted Book Services</a></li>
+        <li><a href="/viewCompletedBook">Completed Book Services</a></li>
+      </ul>
+    </li>
+    {% endif %}
+    <li class="dropdown"><a class="nav-link text-white g-5" href="{% url 'profile' user.id %}"><span>{{ request.user.firstname }} <img src="{{request.user.image}}" style="height: 30px; width: 30px; border-radius: 2rem;"></a>
+      <ul>
+        <li><a href="{% url 'profile' user.id %}">View Profile</a></li>
+        <li><a href="/change_password">Change Password</a></li>
+        <li><a href="{% url 'editprofile' user.id %}">Edit Information</a></li>
+        <li><a href="{% url 'logout_view' %}">Logout</a></li>
+      </ul>
+    </li>
+    <a class="nav-link" href="{% url 'logout_view' %}"><button type="button" class="btn btn-danger"><b>Logout</b></button></a>
+    {% if not.request.user.is_staff %}
+    <a class="nav-link" href="{% url 'viewBookService' %}"><button type="button" class="btn btn-light"><b>Booked Service</b></button></a>
+    {% endif %}
+    {% else %}
+    <a class="nav-link" href="{% url 'signup_view' %}#signup"><button type="button" class="btn btn-warning"><b>Sign up</b></button></a>
+    <a class="nav-link" href="{% url 'login_view' %}#login"><button type="button" class="btn btn-primary"><b>Login</b></button></a>
+  </ul>
+  {% endif %}
+  <i class="bi bi-list mobile-nav-toggle"></i>
+</nav>

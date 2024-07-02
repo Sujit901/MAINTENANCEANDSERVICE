@@ -1,0 +1,70 @@
+{% extends "index.html" %}
+
+{% block content %}
+<section class="vh-150 bg-image" style="background-image: url('/static/img/signup.jpg');">
+    <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+        <div class="container h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                    <div class="card" style="border-radius: 15px;">
+                        <div class="card-body p-5">
+                            <h2 class="text-uppercase text-center mb-5">Add Service</h2>
+                            {% if error %}
+                            <div style="color:red"> {{ error }} </div>
+                            {% endif %}
+                            {% if success %}
+                            <div style="color: green;"> {{ success }} </div>
+                            {% endif %}
+                            <br>
+                            <form method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="form-outline flex-fill mb-0">
+                                    <label class="form-label" for="form3Example1c">Service Image <span
+                                            style="color: red;">*</span></label>
+                                    <input type="file" name="image" id="form3Example1c" required="true"
+                                        class="form-control" accept="image/png, image/jpeg" />
+                                </div>
+                                <br>
+                                <div class="form-outline mb-4">
+                                    <label class="form-label" for="form3Example1cg">Service Name <span
+                                            style="color: red;">*</span></label>
+                                    <input type="text" id="form3Example1cg" name="name"
+                                        class="form-control form-control-lg" placeholder="Service name" required="true"
+                                        onkeydown="return /[a-zA-Z0-9]/i.test(event.key)" />
+                                </div>
+                                <br>
+                                <div class="form-outline mb-4">
+                                    <label class="form-label" for="form3Example1cg">Service Description <span
+                                            style="color: red;">*</span></label>
+                                    <input type="text" id="form3Example1cg" name="description"
+                                        class="form-control form-control-lg" placeholder="Service Description"
+                                        required="true" onkeydown="return /[a-zA-Z0-9 ]/i.test(event.key)" />
+                                </div>
+                                <br>
+                                <div class="form-outline mb-4">
+                                    <label for="cars">Choose Status:</label>
+
+                                    <select id="availability" name="available">
+                                        <option value="AVAILABLE" name="available">Available</option>
+                                        <option value="UNAVAILABLE" name="available">Unavailable</option>
+                                    </select><span
+                                    style="color: red;">*</span>
+                                </div>
+
+
+                                <div class="d-flex justify-content-center">
+                                    <button type="submit"
+                                        class="btn btn-warning btn-block btn-lg gradient-custom-4 text-body">Add
+                                        Service</button>
+                                </div>
+
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

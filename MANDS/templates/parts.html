@@ -1,0 +1,102 @@
+{% extends "index.html" %}
+
+{% block content %}
+{% if parts %}
+<section class="hero is-primary"
+    style="background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.65)), url('/static/img/signup.jpg');">
+    <br>
+    <br>
+    <div class="hero-body">
+        <div class="container d-flex justify-content-center shadow-lg p-2 mb-5 bg-white rounded">
+            <h1 class="title">
+                <b>Parts</b>
+            </h1>
+            <div class="d-flex">
+                <a href="{% url 'addParts' %}"><button type="button" class="btn btn-warning btn-lg px-4 shadow-lg"
+                        style="margin-left: 388%; margin-top: 7%;"><b>Add
+                            parts</b></button></a>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <a href="/problemUnknown"><button type="button" class="btn btn-primary btn-lg px-4 shadow-lg"
+                style="margin-right: 300%; margin-top: 7%;"><b>Problem unknown</b></button></a>
+    </div>
+    <br>
+    <form action="{% url 'partsSearchView' product.product_name %}" method="GET">
+        <div class="input-group d-flex justify-content-center">
+            <div class="form-outline">
+                <input type="search" id="form1" name="search" placeholder="Search Product" class="form-control" />
+            </div>
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+    </form>
+    <br>
+    <div class="container">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for parts in parts %}
+            <div class="col">
+                <div class="card h-100 mb-3 shadow-lg mb-5 bg-white rounded">
+                    <img src="{{parts.image.url}}" class="card-img-top" alt="Image" style="height: 15rem; width: 100%;">
+                    <h1 style="text-align: center;">{{parts.parts_name}}</h1>
+                    <p class="container" style="text-align: justify;">{{parts.description}}</p>
+                    <p class="container"><b>Price:</b> {{parts.price}}</p>
+                    <p class="container"><b>Service charge:</b> {{parts.service_charge}}</p>
+                    <br>
+                    <br>
+                    <br>
+                    {% if parts.available == "AVAILABLE" %}
+                    <a href="{% url 'bookService' parts.parts_name %}"><button type="button"
+                            class="btn btn-warning btn-lg px-4" style="width: 100%;">Book service
+                        </button></a>
+                    {% else %}
+
+                    <a><button type="button" class="btn btn-warning btn-lg px-4" style="width: 100%;"
+                            disabled>Unavailable</button></a>
+                    {% endif %}
+
+                    <div class="container d-flex my-1">
+                        <div class="mx-5">
+                            <a href="{% url 'sureParts' parts.parts_name %}"><button type="button"
+                                    class="btn btn-danger btn-lg px-4">Delete</button></a>
+                        </div>
+                        <div class="me-5" style="margin-left: 9%;">
+                            <a href="{% url 'editParts' parts.parts_name %}"><button type="button"
+                                    class="btn btn-warning btn-lg px-4">Edit</button></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <br>
+    <br>
+    {% else %}
+    <div class="card">
+        <div class="card-body justify-content-center" style="height: 758px; width: 100%;">
+            <div class="container d-flex justify-content-center">
+                <h1><b>No parts available</b></h1>
+            </div>
+            <div class="container">
+                <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                    <a class="nav-link text-white" href="/"><button type="button"
+                            class="btn btn-primary btn-lg px-4 shadow-lg mb-5 rounded">Ok</button></a>
+                    <a href="{% url 'addParts' %}"><button type="button" class="btn btn-primary btn-lg px-4 shadow-lg mb-5 rounded">Add Parts</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+</section>
+{% endblock %}

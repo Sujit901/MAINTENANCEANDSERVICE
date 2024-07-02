@@ -1,0 +1,138 @@
+{% extends "index.html" %}
+
+{% block content %}
+{% if view %}
+<style>
+    table tr th{
+  background:#337ab7;
+  color:white;
+  text-align:left;
+  vertical-align:center;
+}
+</style>
+<section class="hero is-primary"
+    style="background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.65)), url('/static/img/signup.jpg');">
+    <br>
+    <br>
+    <br>
+    <br>
+    <!-- <div class="container">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <table style="background: #ffffff; width:100%; text-align:center; border:2px solid black;">
+                <tr style="background: #ffffff; width:100%; text-align:center; border:2px solid black;">
+                    <th style="background: #ffffff; text-align:center; border:2px solid black;">First Name</th>
+                    <th style="background: #ffffff; text-align:center; border:2px solid black;">Middle Name</th>
+                    <th style="background: #ffffff; text-align:center; border:2px solid black;">Last Name</th>
+                    <th style="background: #ffffff; text-align:center; border:2px solid black;">Phone Number</th>
+                    <th style="background: #ffffff; text-align:center; border:2px solid black;">Location</th>
+                    <th style="background: #ffffff; text-align:center; border:2px solid black;">Email</th>
+                    <th style="background: #ffffff; text-align:center; border:2px solid black;">Parts</th>
+                    <th style="background: #ffffff; text-align:center; border:2px solid black;">Price</th>
+                    <th style="background: #ffffff; text-align:center; border:2px solid black;">Service Charge</th>
+                    <th style="background: #ffffff; text-align:center; border:2px solid black;">Date</th>
+                    <th style="background: #ffffff; text-align:center; border:2px solid black;">Time</th>
+                    <th style="background: #ffffff; text-align:center; border:2px solid black;">Status</th>
+                    <th style="background: #ffffff; text-align:center; border:2px solid black;">Action</th>
+                </tr>
+            {% for book in view %}
+                {% if book.email == request.user.email %}
+                <tr style="background: #ffffff; width:100%; text-align:center; border:2px solid black;">
+                    <td style="background: #ffffff; text-align:center; border:2px solid black;">{{book.firstname}}</td>
+                    <td style="background: #ffffff; text-align:center; border:2px solid black;">{{book.middlename}}</td>
+                    <td style="background: #ffffff; text-align:center; border:2px solid black;">{{book.lastname}}</td>
+                    <td style="background: #ffffff; text-align:center; border:2px solid black;">{{book.number}}</td>
+                    <td style="background: #ffffff; text-align:center; border:2px solid black;">{{book.location}}</td>
+                    <td style="background: #ffffff; text-align:center; border:2px solid black;">{{book.email}}</td>
+                    <td style="background: #ffffff; text-align:center; border:2px solid black;">{{book.parts_name}}</td>
+                    <td style="background: #ffffff; text-align:center; border:2px solid black;">{{book.price}}</td>
+                    <td style="background: #ffffff; text-align:center; border:2px solid black;">{{book.service_charge}}</td>
+                    <td style="background: #ffffff; text-align:center; border:2px solid black;">{{book.date}}</td>
+                    <td style="background: #ffffff; text-align:center; border:2px solid black;">{{book.time}}</td>
+                    <td style="background: #ffffff; text-align:center; border:2px solid black;">{{book.status}}</td>
+                    <td style="background: #ffffff; text-align:center; border:2px solid black;"><a href="{% url 'editBook' book.id %}"><button type="btn" class="btn btn-primary">Edit</button></a>   <a href="{% url 'sureBook' book.id %}"><button type="btn" class="btn btn-danger">Cancel</button></a></td>
+                </tr>
+                {% endif %}
+            {% endfor %}
+            </table>
+        </div>
+    </div> -->
+    <div class="container" ng-app="formvalid">
+        <div class="panel" data-ng-controller="validationCtrl">
+        <div class="panel-heading border">    
+          <h2 style="text-align: center;"><b>Booked Service</b>
+          </h2>
+        </div>
+        <div class="panel-body">
+            <table class="table table-bordered bordered table-striped table-condensed datatable" ui-jq="dataTable" ui-options="dataTableOpt">
+            <thead>
+                <tr style="background: #ffffff; width:100%; text-align:center; border:2px solid black;">
+                    <th style="background: #ffffff; text-align:center; border:2px solid black;">First Name</th>
+                    <th style="background: #ffffff; text-align:center; border:2px solid black;">Middle Name</th>
+                    <th style="background: #ffffff; text-align:center; border:2px solid black;">Last Name</th>
+                    <th style="background: #ffffff; text-align:center; border:2px solid black;">Phone Number</th>
+                    <th style="background: #ffffff; text-align:center; border:2px solid black;">Location</th>
+                    <th style="background: #ffffff; text-align:center; border:2px solid black;">Email</th>
+                    <th style="background: #ffffff; text-align:center; border:2px solid black;">Parts</th>
+                    <th style="background: #ffffff; text-align:center; border:2px solid black;">Price</th>
+                    <th style="background: #ffffff; text-align:center; border:2px solid black;">Service Charge</th>
+                    <th style="background: #ffffff; text-align:center; border:2px solid black;">Date</th>
+                    <th style="background: #ffffff; text-align:center; border:2px solid black;">Time</th>
+                    <th style="background: #ffffff; text-align:center; border:2px solid black;">Status</th>
+                    <th style="background: #ffffff; text-align:center; border:2px solid black;">Action</th>
+                </tr>
+              <tbody>
+                {% for book in view %}
+                    {% if book.status == "Accepted" %}
+                    <tr style="background: #ffffff; width:100%; text-align:center; border:2px solid black;">
+                        <td style="background: #ffffff; text-align:center; border:2px solid black;">{{book.firstname}}</td>
+                        <td style="background: #ffffff; text-align:center; border:2px solid black;">{{book.middlename}}</td>
+                        <td style="background: #ffffff; text-align:center; border:2px solid black;">{{book.lastname}}</td>
+                        <td style="background: #ffffff; text-align:center; border:2px solid black;">{{book.number}}</td>
+                        <td style="background: #ffffff; text-align:center; border:2px solid black;">{{book.location}}</td>
+                        <td style="background: #ffffff; text-align:center; border:2px solid black;">{{book.email}}</td>
+                        <td style="background: #ffffff; text-align:center; border:2px solid black;">{{book.parts_name}}</td>
+                        <td style="background: #ffffff; text-align:center; border:2px solid black;">{{book.price}}</td>
+                        <td style="background: #ffffff; text-align:center; border:2px solid black;">{{book.service_charge}}</td>
+                        <td style="background: #ffffff; text-align:center; border:2px solid black;">{{book.date}}</td>
+                        <td style="background: #ffffff; text-align:center; border:2px solid black;">{{book.time}}</td>
+                        <td style="background: #ffffff; text-align:center; border:2px solid black;">{{book.status}}</td>
+                        <td style="background: #ffffff; text-align:center; border:2px solid black; text-align: center; display: flex; gap: 0.6rem; border: none;"><a href="{% url 'editBook' book.id %}"><button type="btn" class="btn btn-primary">Edit</button></a>   <a href="{% url 'sureBook' book.id %}"><button type="btn" class="btn btn-danger">Cancel</button></a></td>
+                    </tr>
+                    {% endif %}
+                {% endfor %}
+              </tbody>
+          </table>
+        </div>
+      </div>
+      </div>
+    
+    <br>
+    <br>
+    {% else %}
+    <div class="card">
+        <div class="card-body justify-content-center" style="height: 758px; width: 100%;">
+            <div class="container d-flex justify-content-center">
+                <h1><b>No booked service available</b></h1>
+            </div>
+            <div class="container">
+                <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                    <a class="nav-link text-white" href="/"><button type="button"
+                            class="btn btn-primary btn-lg px-4 shadow-lg mb-5 rounded">Ok</button></a>
+                    <a href="/addBanner"><button type="button"
+                            class="btn btn-primary btn-lg px-4 shadow-lg mb-5 rounded">Add
+                            Banner</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+</section>
+{% endblock %}

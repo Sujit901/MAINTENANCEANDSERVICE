@@ -1,0 +1,72 @@
+{% extends "index.html" %}
+
+{% block content %}
+<section class="vh-150" 
+style="background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.65)), url('/static/img/signup.jpg');">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-xl-10">
+        <div class="card " style="border-radius: 2rem;">
+
+          <div class="row g-0">
+            <div class=" d-flex col-md-50">
+
+              <div class="card card-body py-5 px-5" style="border-radius: 2rem; border-color: white;">
+                <div class="d-flex align-items-center mb-3 pb-1">
+                </div>
+                <h1><b>Edit Profile</b></h1>
+                <form action="" method="POST" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  <div class="form-outline mb-4">
+                    <i class="fas fa-image fa-lg me-3 fa-fw"></i>
+                    <label class="form-label" for="form2Example27">Image<span style="color: red;">*</span></label><br>
+                    <p><b>Currently :</b></p>
+                    <image src="{{request.user.image}}" style="width: 80px; height: 80px;">
+                    {{form.image}}
+                  </div>
+                  <div class="form-outline mb-4">
+                      <label class="form-label" for="form3Example1cg">Your Name <span style="color: red;">*</span></label>
+                      <input type="text" id="form3Example1cg" name="firstname" class="form-control form-control-lg" placeholder="First name" value="{{request.user.firstname}}" required="true" onkeydown="return /[a-zA-Z]/i.test(event.key)"/>
+                      <br>
+                      <input type="text" id="form3Example1cg" name="middlename" class="form-control form-control-lg" placeholder="Middle name (Optional)" value="{{request.user.middlename}}" onkeydown="return /[a-zA-Z]/i.test(event.key)"/>
+                      <br>
+                      <input type="text" id="form3Example1cg" name="lastname" class="form-control form-control-lg" placeholder="Last name" value="{{request.user.lastname}}" required="true" onkeydown="return /[a-zA-Z]/i.test(event.key)"/>
+                  </div>
+                  <br>
+                  <div class="d-flex flex-row align-items-center mb-4">
+                      <div class="form-outline flex-fill mb-0">
+                          <label class="form-label" for="form3Example1c">Phone Number <span style="color: red;">*</span></label>
+                          <input type="text" name="number" id="form3Example1c" required="true"
+                              class="form-control" placeholder="Phone Number" value="{{request.user.number}}" minlength="10" maxlength="10" />
+                      </div>
+                  </div>
+                  <div class="d-flex flex-row align-items-center mb-4">
+                      <div class="form-outline flex-fill mb-0">
+                          <label class="form-label" for="form3Example1c">Location <span style="color: red;">*</span></label>
+                          <input type="text" name="location" id="form3Example1c" required="true"
+                              class="form-control" placeholder="Location" value="{{request.user.location}}" maxlength="50" />
+                      </div>
+                  </div>
+                  <br>
+                  <div class="container d-flex justify-content-center">
+                    <button style="color:white" class="btn btn-warning btn-lg px-4" type="submit" name="Submit"
+                      value="Submit">Submit</button>
+                    <div class="container" style="margin-right: 60%;">
+                      <button type="button" class="btn btn-danger btn-lg px-4" onclick="history.back()">Back</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="col-md-6 col-lg-5 d-none d-md-block">
+                <img src="/static/profile.png" alt="login form" class="img-fluid"
+                  style="border-radius: 5rem 5rem 5rem 5rem; margin-top: 1rem;" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
+{% endblock %}
